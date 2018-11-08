@@ -48,7 +48,7 @@ $global-font-size: 16px !default;
 $global-body-width: 1000px !default;
 
 // Global width of '<content>'.
-$global-content-width: 750px !default;
+$global-content-width: 850px !default;
 
 
 // Padding of container main
@@ -140,6 +140,29 @@ $content-blockquote-border-left: 3px solid rgba($theme-color, 0.3) !default;
 $content-table-border-color: darken($deputy-color, 3%) !default;
 
 $content-margin-bottom: 40px !default;
+
+
+// ========== TOC ========== //
+// Width of the post toc.
+$post-toc-width: 200px !default;
+
+// Backgroud color of the post toc.
+$post-toc-backgroud: rgba($deputy-color, 0.6) !default;
+
+// Margin left of the post toc.
+$post-toc-margin-left: $global-content-width + 15 !default;
+
+// Font size of the post toc title.
+$post-toc-title-size: 20px !default;
+
+// Font size of the post toc content.
+$post-toc-content: 15px !default;
+
+// List style of the post toc list.
+$post-toc-list-style: square !default;
+
+// Max screen media of the post toc.
+$toc-max-sreen-width: 2 * $post-toc-width + $post-toc-margin-left !default;
 
 // ========== Code ========== //
 // Color of the code.
