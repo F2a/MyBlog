@@ -2,6 +2,7 @@
 title: 深入了解JavaScript底层原理
 date: 2018-11-01 15:52:50
 tags: aaaaaaa
+toc: true
 ---
 [TOC]
 1. 七种内置类型
