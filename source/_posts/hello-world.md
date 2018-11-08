@@ -1,6 +1,6 @@
 ---
 title: Hello World
-toc: false
+toc: true
 ---
 # 一级标题
 ## 二级标题
