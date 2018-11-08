@@ -4,7 +4,7 @@
 
 # Site
 title: 银の龙の背に乗って
-subtitle:
+subtitle: FangR's Blog
 description:
 keywords:
 author: FangR
@@ -70,6 +70,7 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+toc: true
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
@@ -86,3 +87,5 @@ archive_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+

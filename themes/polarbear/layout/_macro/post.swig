@@ -14,7 +14,8 @@
       </time>
     </header>
 
-
+    {# Post TOC #}
+    {% include "../_partial/toc.swig" %}
 
     {% if is_home() %}
         <div class="post-excerpt">
