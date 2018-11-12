@@ -1,13 +1,12 @@
 ---
-title: 深入了解JavaScript底层原理
+title: JavaScript基础原理（一）
 date: 2018-11-01 15:52:50
 tags: JS原理
 toc: true
 ---
-[TOC]
 
 ### 1. 七种内置类型
-    基本类型： null，undefined，boolean，number（浮点类型），string，symbol。
+    基本类型： null，undefined，boolean，number（浮点类型），string，symbol（es6）。
     对象：Object。
 
 #### 类型转换
@@ -218,7 +217,7 @@ var foo = 1
 (function foo() {
     foo = 10
     console.log(foo)
-}()) // -> ƒ foo() { foo = 10 ; console.log(foo) }
+}()) // -> ƒ foo() { foo = 10 ; console.log(foo) }  打印出立即执行函数自身
 // 内部独立作用域，不会影响外部的值
 ```
 
