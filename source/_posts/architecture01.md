@@ -91,6 +91,53 @@ setTimeout(() => foo = 'baz', 500);
 // 上面代码输出变量foo，值为bar，500 毫秒之后变成baz。
 ```
 
+##### export default
+
+1. 为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到export default命令，为模块指定默认输出。
+2. 一个模块只能有一个默认输出，因此export default命令只能使用一次。
+3. export default也可以用来输出类。
+
+```
+// export-default.js
+export default function () {
+  console.log('foo');
+}
+
+// 或者写成
+function foo() {
+  console.log('foo');
+}
+export default foo;
+
+// 上面代码是一个模块文件export-default.js，它的默认输出是一个函数。
+// 其他模块加载该模块时，import命令可以为该匿名函数指定任意名字。
+
+// import-default.js
+import customName from './export-default';
+customName(); // 'foo'
+// 注意的是，这时import命令后面，不使用大括号。
+```
+
+下面的写法是有效的。
+
+```
+// modules.js
+function add(x, y) {
+  return x * y;
+}
+export {add as default};
+// 等同于
+// export default add;
+
+// app.js
+import { default as foo } from 'modules';
+// 等同于
+// import foo from 'modules';
+
+// 如果想在一条import语句中，同时输入默认方法和其他接口，可以写成下面这样。
+import _, { each, forEach } from 'lodash';
+```
+
 ##### 重命名 as
 
 ```
@@ -231,3 +278,82 @@ circle.area = function () {};
 import { lastName as surname } from './profile.js';
 ```
 
+##### 动态加载import()
+
+import和export命令只能在模块的顶层
+
+```
+// 报错
+if (x === 2) {
+  import MyModual from './myModual';
+}
+
+// 引擎处理import语句是在编译时，这时不会去分析或执行if语句，所以import语句放在if代码块之中毫无意义，因此会报句法错误，而不是执行时错误
+```
+
+引入import()函数，完成动态加载。
+
+```
+const main = document.querySelector('main');
+
+import(`./section-modules/${someVariable}.js`)
+  .then(module => {
+    module.loadPageInto(main);
+  })
+  .catch(err => {
+    main.textContent = err.message;
+  });
+```
+
+import()函数可以用在任何地方，不仅仅是模块，非模块的脚本也可以使用。它是运行时执行，也就是说，什么时候运行到这一句，就会加载指定的模块。另外，import()函数与所加载的模块没有静态连接关系，这点也是与import语句不相同。import()类似于 Node 的require方法，区别主要是前者是异步加载，后者是同步加载。
+
+```
+// 按需加载。
+button.addEventListener('click', event => {
+  import('./dialogBox.js')
+  .then(dialogBox => {
+    dialogBox.open();
+  })
+  .catch(error => {
+    /* Error handling */
+  })
+});
+
+// 条件加载。
+if (condition) {
+  import('moduleA').then(...);
+} else {
+  import('moduleB').then(...);
+}
+
+// 动态的模块路径
+// import()允许模块路径动态生成。
+import(f())
+.then(...);
+```
+
+```
+// default输出接口，可以用参数直接获得。
+import('./myModule.js')
+.then(myModule => {
+  console.log(myModule.default);
+});
+
+// 上面的代码也可以使用具名输入的形式。
+import('./myModule.js')
+.then(({default: theDefault}) => {
+  console.log(theDefault);
+});
+
+// 如果想同时加载多个模块，可以采用下面的写法。
+Promise.all([
+  import('./module1.js'),
+  import('./module2.js'),
+  import('./module3.js'),
+])
+.then(([module1, module2, module3]) => {
+   ···
+});
+
+// import()也可以用在 async 函数之中。
+```
