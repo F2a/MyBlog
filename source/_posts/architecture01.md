@@ -6,6 +6,8 @@ toc: true
 ---
 
 ### 1. ES6的模块功能
+
+有 Babel 的情况下，我们可以直接使用 ES6 的模块化。
 主要由两个命令构成：export和import。
 
 #### export
@@ -272,13 +274,7 @@ circle.foo = 'hello';
 circle.area = function () {};
 ```
 
-##### 重命名 as
-
-```
-import { lastName as surname } from './profile.js';
-```
-
-##### 动态加载import()
+##### 动态加载
 
 import和export命令只能在模块的顶层
 
@@ -291,7 +287,7 @@ if (x === 2) {
 // 引擎处理import语句是在编译时，这时不会去分析或执行if语句，所以import语句放在if代码块之中毫无意义，因此会报句法错误，而不是执行时错误
 ```
 
-引入import()函数，完成动态加载。
+因此，有一个提案，建议引入import()函数，完成动态加载。
 
 ```
 const main = document.querySelector('main');
@@ -357,3 +353,57 @@ Promise.all([
 
 // import()也可以用在 async 函数之中。
 ```
+
+##### 重命名 as
+
+```
+import { lastName as surname } from './profile.js';
+```
+
+### 2. CommonJS
+
+CommonJs 是 Node 独有的规范，浏览器中使用就需要用到 Browserify 解析。
+
+```
+// a.js
+module.exports = {
+    a: 1
+}
+// or
+exports.a = 1
+
+// b.js
+var module = require('./a.js')
+module.a // -> log 1
+```
+
+来说说 module.exports 和 exports，用法其实是相似的，但是不能对 exports 直接赋值，不会有任何效果。
+
+对于 CommonJS 和 ES6 中的模块化的两者区别是：
+
+- 前者支持动态导入，也就是 require(${path}/xx.js)，后者目前不支持，但是已有提案 import()
+- 前者是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
+- 前者在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是后者采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
+- 后者会编译成 require/exports 来执行的
+
+### 3. AMD
+
+AMD 是由 RequireJS 提出的
+
+```
+// AMD
+define(['./a', './b'], function(a, b) {
+    a.do()
+    b.do()
+})
+define(function(require, exports, module) {
+    var a = require('./a')
+    a.doSomething()
+    var b = require('./b')
+    b.doSomething()
+})
+```
+
+
+
+
