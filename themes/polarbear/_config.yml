@@ -34,7 +34,7 @@ widget:
   Custom: true
 
 widget_custom:
-    title: Test
+    title: 我的
     content: <p>testing...</p>
 
 # ===========================================
