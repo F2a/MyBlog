@@ -5,6 +5,8 @@ tags: 架构设计
 toc: true
 ---
 
+> 整理自面谱 InterviewMap
+
 ### 1. ES6的模块功能
 
 有 Babel 的情况下，我们可以直接使用 ES6 的模块化。
@@ -403,7 +405,4 @@ define(function(require, exports, module) {
     b.doSomething()
 })
 ```
-
-> 整理自面谱 InterviewMap
-
 
