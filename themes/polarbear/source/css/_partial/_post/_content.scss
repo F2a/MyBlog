@@ -7,7 +7,7 @@
 
   @for $i from 1 through 6 {
     h#{$i} {
-      font-size: 1.3em;
+      font-size: 1 + 0.6 - $i * 0.1em;
       font-weight: 400;
       font-family: $global-font-family;
       margin-top: 1.2em;
@@ -23,6 +23,12 @@
       margin-right: 5px;
       font-size: 1.1em;
       color: $theme-color;
+    }
+  }
+
+  ul {
+    li {
+      font-size: 0.9rem;
     }
   }
 
@@ -54,6 +60,7 @@
   img {
     display: inline-block;
     max-width: 100%;
+    margin: 0 auto;
   }
 
   > table {

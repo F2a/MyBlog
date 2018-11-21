@@ -31,6 +31,9 @@ a {
   text-decoration: none;
 }
 
+blockquote {
+  font-size: 12px;
+}
 @each $header, $size in $global-headings {
   #{$header} {
     font-size: $size;
