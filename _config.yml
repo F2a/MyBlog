@@ -86,6 +86,6 @@ archive_generator:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
-
-
+  type: git
+  repo: https://github.com/F2a/blog.git
+  branch: master
