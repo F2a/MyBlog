@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Vue 3.0 新特性预览">
+
+
+
+
+  <meta name="keywords" content="vue,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="银の龙の背に乗って">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://blog.com/2018/11/21/vue01/">
+
+
+<meta name="description" content="来自：开源中国https://www.oschina.net/news/101906/vue-3-0-updates    可以看到，Vue 3.0 将会： 1、更快  Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；  更多编译时（compile-time）提醒以减少 runtime 开销；  基于 Proxy 观察者机制以满足全语言覆盖及更">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 3.0 新特性预览">
+<meta property="og:url" content="http://blog.com/2018/11/21/vue01/index.html">
+<meta property="og:site_name" content="银の龙の背に乗って">
+<meta property="og:description" content="来自：开源中国https://www.oschina.net/news/101906/vue-3-0-updates    可以看到，Vue 3.0 将会： 1、更快  Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；  更多编译时（compile-time）提醒以减少 runtime 开销；  基于 Proxy 观察者机制以满足全语言覆盖及更">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://blog.com/2018/11/21/vue01/vue3.jpg">
+<meta property="og:image" content="http://blog.com/2018/11/21/vue01/vue.jpg">
+<meta property="og:updated_time" content="2018-11-22T06:19:36.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 3.0 新特性预览">
+<meta name="twitter:description" content="来自：开源中国https://www.oschina.net/news/101906/vue-3-0-updates    可以看到，Vue 3.0 将会： 1、更快  Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；  更多编译时（compile-time）提醒以减少 runtime 开销；  基于 Proxy 观察者机制以满足全语言覆盖及更">
+<meta name="twitter:image" content="http://blog.com/2018/11/21/vue01/vue3.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Vue 3.0 新特性预览 - 银の龙の背に乗って </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">银の龙の背に乗って</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                关于
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Vue 3.0 新特性预览
+        
+      </h1>
+
+      <time class="post-time">
+          11月 21 2018
+      </time>
+    </header>
+
+    
+    
+
+    
+            <div class="post-content">
+            <blockquote>
+<p>来自：开源中国<br><a href="https://www.oschina.net/news/101906/vue-3-0-updates" target="_blank" rel="noopener">https://www.oschina.net/news/101906/vue-3-0-updates</a></p>
+</blockquote>
+<div style="text-align: center; width: 75%; margin: 0 auto"><br><img src="/2018/11/21/vue01/vue3.jpg" alt="vue3.0"><br></div>
+
+<p>可以看到，Vue 3.0 将会：</p>
+<p>1、更快</p>
+<ul>
+<li><p>Virtual DOM 完全重写，mounting &amp; patching 提速 100% ；</p>
+</li>
+<li><p>更多编译时（compile-time）提醒以减少 runtime 开销；</p>
+</li>
+<li><p>基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；</p>
+</li>
+<li><p>放弃 Object.defineProperty ，使用更快的原生 Proxy ；</p>
+</li>
+<li><p>组件实例初始化速度提高 100％ ；</p>
+</li>
+<li><p>提速一倍/内存使用降低一半。</p>
+</li>
+</ul>
+<p>2、更小</p>
+<ul>
+<li><p>Tree-shaking 更友好；</p>
+</li>
+<li><p>新的 core runtime: ~10kb gzipped</p>
+</li>
+</ul>
+<p>3、更易维护</p>
+<ul>
+<li><p>Flow -&gt; TypeScript</p>
+</li>
+<li><p>Decoupled Packages（解耦包）</p>
+</li>
+<li><p>编译器重写</p>
+</li>
+</ul>
+<p>4、更易于原生</p>
+<ul>
+<li>自定义 Renderer API</li>
+</ul>
+<div style="text-align: center; width: 75%; margin: 0 auto"><br><img src="/2018/11/21/vue01/vue.jpg" alt="vue3.0"><br></div>
+
+<p>5、让开发者更轻松</p>
+<ul>
+<li><p>Exposed reactivity API</p>
+</li>
+<li><p>轻松识别组件重新渲染的原因</p>
+</li>
+<li><p>改进 TypeScript 以支持 w/TSX</p>
+</li>
+<li><p>改进警告追踪</p>
+</li>
+<li><p>Experimental Hooks API</p>
+</li>
+<li><p>Experimental Time Slicing Support</p>
+</li>
+<li><p>支持 IE11</p>
+</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/vue/">vue</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/10/01/architecture01/">
+        <span class="next-text nav-default">初识前端模块化</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2017 -
+    
+    2018
+    <span class="footer-author">FangR.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
