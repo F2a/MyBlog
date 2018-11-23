@@ -34,8 +34,8 @@ widget:
   Custom: true
 
 widget_custom:
-    title: 我的
-    content: <p>testing...</p>
+    title: 友链：
+    content: <a>加工中...</a>
 
 # ===========================================
 # Theme Settings
@@ -65,10 +65,3 @@ disqus_shortname:
 # Version
 # ===========================================
 version: 1.1
-
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: https://f2a.github.io/blog.git
-  branch: master
