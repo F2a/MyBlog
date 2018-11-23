@@ -1,6 +1,6 @@
 ---
 title: 在github上搭建hexo博客踩坑记录
-date: 2017-12-22 16:46:36
+date: 2018-10-15 16:46:36
 tags: 其他
 toc: true
 ---
@@ -18,7 +18,6 @@ toc: true
 ## 安装Hexo
 
 ```
-$ cd d:/hexo
 $ npm install hexo-cli -g
 $ hexo init blog
 $ cd blog
@@ -29,6 +28,8 @@ $ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看
 # hexo主题设置
 
 ## 安装主题
+
+hexo官网提供许多 [主题](https://hexo.io/themes/)
 
 ```
 $ hexo clean
@@ -86,8 +87,6 @@ $ git commit --allow-empty -m "root commit"  // 在推送到GitHub之前，即�
 $ git push origin empty-branch // 最后，把它推到远程
 ```
 
-- 再切换回github项目Default branch为master
-
 - 复制代码然后把Hexo项目文件夹下的内容全部复制过来，再npm install。
 
 ***这样我们就可以在一个项目中同时保存hexo的原始代码和部署文件了***
@@ -106,7 +105,7 @@ deploy:
 然后在命令行中执行
 
 ```
-hexo g // 生产静态文件
+hexo g // 产生静态文件
 hexo d // 将静态文件部署到远程仓库 master 分支下
 ```
 
@@ -141,7 +140,7 @@ and the repository exists.
 
 官网文档-配置中已经有解释
 
-修改_config.yml配置。
+修改_config.yml配置：
 
 ```
 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
