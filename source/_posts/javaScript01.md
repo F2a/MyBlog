@@ -5,11 +5,14 @@ tags: JS原理
 toc: true
 ---
 
-### 1. 七种内置类型
+> 整理自面谱 InterviewMap
+
+## 1. 七种内置类型
     基本类型： null，undefined，boolean，number（浮点类型），string，symbol（es6）。
     对象：Object。
 
-#### 类型转换
+### 类型转换
+
 - typeof:
 
 ```
@@ -20,7 +23,7 @@ typeof true // 'boolean'
 typeof Symbol() // 'symbol'
 typeof b // b 没有声明，但是还会显示 undefined
 typeof []  // 'object'
-typeof {}  // 'object
+typeof {}  // 'object'
 typeof null  // 'object'
 typeof console.log // 'function'
 ```
@@ -52,7 +55,8 @@ let a = {
 如果是字符串，就通过 unicode 字符索引来比较
 ```
 
-#### 四则运算
+### 四则运算
+
     只有当加法运算时，其中一方是字符串类型，就会把另一个也转为字符串类型。
     其他运算只要其中一方是数字，那么另一方就转为数字。
     并且加法运算会触发三种类型转换：将值转换为原始值，转换为数字，转换为字符串。
@@ -70,13 +74,15 @@ let a = {
 // 因为 + 'b' -> NaN
 ```
 
-#### 冷知识
+### 冷知识
+
 - NaN 属于 number 类型，并且 NaN 不等于自身。
 - undefined 不是保留字，能够在低版本浏览器被赋值 let undefined = 1
 
-### 2. 实例对象
+## 2. 实例对象
 
-#### new
+### new
+
 - 在调用 new 的过程中会发生以上四件事情
 
 ```
@@ -127,7 +133,7 @@ new (Foo.getName());
 // 然后通过原型链找到了 Foo 上的 getName 函数，所以结果为 2。
 ```
 
-#### this
+### this
 
 - 通用规则
 new有最高优先级，利用 call，apply，bind 改变 this，优先级仅次于 new。
@@ -154,18 +160,20 @@ console.log(c.a)
 
 // 还有种就是利用 call，apply，bind 改变 this，这个优先级仅次于 new
 ```
+
 - 箭头函数其实是没有 this 的，这个函数中的 this 只取决于他外面的第一个不是箭头函数的函数的 this。在这个例子中，因为调用 a 符合前面代码中的第一个情况，所以 this 是 window。并且 this 一旦绑定了上下文，就不会被任何代码改变。
 
-#### 冷知识
+### 冷知识
+
 - instanceof 可以正确的判断对象的类型，因为内部机制是通过判断对象的原型链中是不是能找到类型的 prototype。
 
-### 3. 执行上下文
+## 3. 执行上下文
 
 1. 全局执行上下文
 2. 函数执行上下文
 3. eval 执行上下文
 
-#### 属性 VO & AO
+### 属性 VO & AO
 
 变量对象 (缩写为VO)就是与执行上下文相关的对象，它存储下列内容：
 1. 变量 (var, VariableDeclaration);
@@ -181,7 +189,7 @@ console.log(c.a)
 
 - 属性的值就是函数的参数值(按参数列表从左到右排列)。 properties-indexes内部元素的个数等于arguments.length. properties-indexes 的值和实际传递进来的参数之间是共享的。(译者注：共享与不共享的区别可以对比理解为引用传递与值传递的区别)
 
-#### 属性 this&作用域链
+### 属性 this&作用域链
 
 ```
 b() // call b
@@ -221,7 +229,8 @@ var foo = 1
 // 内部独立作用域，不会影响外部的值
 ```
 
-#### 一个面试题
+### 一个面试题
+
 循环中使用闭包解决 var 定义函数的问题
 
 ```
@@ -236,6 +245,7 @@ for ( var i=1; i<=5; i++) {
 解决办法
 
 第一种使用闭包
+
 ```
 for (var i = 1; i <= 5; i++) {
   (function(j) {
@@ -294,9 +304,9 @@ for ( let i=1; i<=5; i++) {
 }
 ```
 
-### 4. 深浅拷贝
+## 4. 深浅拷贝
 
-#### 浅拷贝
+### 浅拷贝
 
 - 通过 Object.assign
 
@@ -322,7 +332,7 @@ console.log(b.age) // 1
 
 - 弊端：浅拷贝只解决了第一层的问题。如果接下去的值中还有对象的话，那么就又回到刚开始的话题了，两者享有相同的引用。要解决这个问题，我们需要引入深拷贝。
 
-#### 深拷贝
+### 深拷贝
 
 - 通过 JSON.parse(JSON.stringify(object))
 
@@ -375,5 +385,3 @@ var obj = {a: 1, b: {
 // 可以处理 undefined 和循环引用对象
 const clone = await structuralClone(obj);
 ```
-
-> 整理自面谱 InterviewMap

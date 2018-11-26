@@ -1,20 +1,20 @@
 ---
-title: 初识前端模块化
-date: 2018-10-01 16:12:20
+title: 前端框架入门（二）- 初识前端模块化
+date: 2018-7-05 16:12:20
 tags: 架构设计
 toc: true
 ---
 
 > 整理自面谱 InterviewMap
 
-### 1. ES6的模块功能
+# 1. ES6的模块功能
 
 有 Babel 的情况下，我们可以直接使用 ES6 的模块化。
 主要由两个命令构成：export和import。
 
-#### export
+## export
 
-##### 正确的写法
+### 正确的写法
 
 ```
 // profile.js
@@ -39,7 +39,7 @@ export function multiply(x, y) {
 // 对外输出一个函数multiply。
 ```
 
-##### 错误的写法
+### 错误的写法
 
 export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。
 
@@ -95,7 +95,7 @@ setTimeout(() => foo = 'baz', 500);
 // 上面代码输出变量foo，值为bar，500 毫秒之后变成baz。
 ```
 
-##### export default
+### export default
 
 1. 为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到export default命令，为模块指定默认输出。
 2. 一个模块只能有一个默认输出，因此export default命令只能使用一次。
@@ -142,7 +142,7 @@ import { default as foo } from 'modules';
 import _, { each, forEach } from 'lodash';
 ```
 
-##### 重命名 as
+### 重命名 as
 
 ```
 function v1() { ... }
@@ -155,11 +155,11 @@ export {
 };
 ```
 
-#### import
+## import
 
 使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块。
 
-##### 正确的写法
+### 正确的写法
 
 import命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（profile.js）对外接口的名称相同。
 
@@ -204,7 +204,7 @@ import { bar } from 'my_module';
 import { foo, bar } from 'my_module';
 ```
 
-##### 错误的写法
+### 错误的写法
 
 import是静态执行，所以不能使用表达式和变量
 
@@ -240,7 +240,7 @@ a.foo = 'hello'; // 合法操作
 //a的属性可以成功改写，并且其他模块也可以读到改写后的值。不过，这种写法很难查错，建议凡是输入的变量，都当作完全只读，轻易不要改变它的属性。
 ```
 
-##### 整体加载
+### 整体加载
 
 用星号（*）指定一个对象，所有输出值都加载在这个对象上面。
 
@@ -276,7 +276,7 @@ circle.foo = 'hello';
 circle.area = function () {};
 ```
 
-##### 动态加载
+### 动态加载
 
 import和export命令只能在模块的顶层
 
@@ -356,13 +356,13 @@ Promise.all([
 // import()也可以用在 async 函数之中。
 ```
 
-##### 重命名 as
+### 重命名 as
 
 ```
 import { lastName as surname } from './profile.js';
 ```
 
-### 2. CommonJS
+# 2. CommonJS
 
 CommonJs 是 Node 独有的规范，浏览器中使用就需要用到 Browserify 解析。
 
@@ -388,7 +388,7 @@ module.a // -> log 1
 - 前者在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是后者采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
 - 后者会编译成 require/exports 来执行的
 
-### 3. AMD
+# 3. AMD
 
 AMD 是由 RequireJS 提出的
 
