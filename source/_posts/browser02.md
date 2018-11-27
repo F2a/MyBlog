@@ -58,7 +58,7 @@ toc: true
 - 将 script 标签放在 body 底部，因为 JS 文件执行会阻塞渲染。当然也可以把 script 标签放在任意位置然后加上 defer ，表示该文件会并行下载，但是会放到 HTML 解析完成后顺序执行。对于没有任何依赖的 JS 文件可以加上 async ，表示加载和渲染后续文档元素的过程将和 JS 文件的加载与执行并行无序进行。
 - 执行 JS 代码过长会卡住渲染，对于需要很多时间计算的代码可以考虑使用 Webworker。Webworker 可以让我们另开一个线程执行脚本而不影响渲染。
 
-```
+``` js
 <script type="text/javascript" defer="defer">
 // defer 属性规定是否对脚本执行进行延迟，直到页面加载为止。
 
@@ -115,7 +115,7 @@ script标签的crossorigin属性
 - 但是对于跨域调用的js脚本，onerror事件只会给出很少的报错信息：error: Script error.
 - 这个简单的信息很明显不足以看出脚本的具体错误，所以我们可以使用crossorigin属性，使得加载的跨域脚本可以得出跟同域脚本同样的报错信息：
 
-```
+``` js
 <script crossorigin  src="http://www.lmj.com/demo/crossoriginAttribute/error.js"></script>
 
 //　如果是这样，www.lmj.com的服务器必须给出一个Access-Control-Allow-Origin的header，否则无法访问此脚本。
@@ -127,7 +127,7 @@ script标签的crossorigin属性
 
 这道题考察了如何在不卡住页面的情况下渲染数据，也就是说不能一次性将几万条都渲染出来，而应该一次渲染部分 DOM，那么就可以通过 `requestAnimationFrame` 来每 16 ms 刷新一次。
 
-```
+``` html
 <!DOCTYPE html>
 <html lang="en">
 

@@ -29,7 +29,25 @@ MVVM 由以下三个内容组成
 
 Vue 内部使用了 `Object.defineProperty()` 来实现双向绑定，通过这个函数可以监听到 set 和 get 的事件。
 
+```js
+Object.defineProperty(object, propertyname, descriptor)
 ```
+
+参数
+
+- object 必需。 要在其上添加或修改属性的对象。 这可能是一个本机 JavaScript对象（即用户定义的对象或内置对象）或 DOM 对象。
+- propertyname 必需。 一个包含属性名称的字符串。
+- descriptor 必需。 属性描述符。 它可以针对数据属性或访问器属性。
+    - 【value】 属性的值，默认为 undefined。
+    - 【writable】 该属性是否可写，如果设置成 false，则任何对该属性改写的操作都无效（但不会报错），对于像前面例子中直接在对象上定义的属性，这个属性该特性默认值为为 true。
+    - 【configurable]】如果为false，则任何尝试删除目标属性或修改属性以下特性（writable, configurable, enumerable）的行为将被无效化，对于像前面例子中直接在对象上定义的属性，这个属性该特性默认值为为 true。
+    - 【enumerable】 是否能在for-in循环中遍历出来或在Object.keys中列举出来。对于像前面例子中直接在对象上定义的属性，这个属性该特性默认值为为 true。
+    - 【get】一旦目标对象访问该属性，就会调用这个方法，并返回结果。默认为 undefined。
+    - 【set】 一旦目标对象设置该属性，就会调用这个方法。默认为 undefined。
+
+从上面，可以得知，我们可以通过使用Object.defineProperty，来定义和控制一些特殊的属性，如属性是否可读，属性是否可枚举，甚至修改属性的修改器（setter）和获取器(getter)
+
+```js
 var data = { name: 'yck' }
 observe(data)
 let name = data.name // -> get value
@@ -65,7 +83,7 @@ function defineReactive(obj, key, val) {
 
 以上代码简单的实现了如何监听数据的 set 和 get 的事件，但是仅仅如此是不够的，还需要在适当的时候给属性添加发布订阅
 
-```
+```html
 <div>
     {{name}}
 </div>
@@ -73,7 +91,7 @@ function defineReactive(obj, key, val) {
 
 在解析如上模板代码时，遇到 {{name}} 就会给属性 name 添加发布订阅。
 
-```
+```js
 // 通过 Dep 解耦
 class Dep {
   constructor() {
@@ -149,3 +167,39 @@ function defineReactive(obj, key, val) {
 ```
 
 以上实现了一个简易的双向绑定，核心思路就是手动触发一次属性的 getter 来实现发布订阅的添加。
+
+# Proxy 与 Object.defineProperty 对比
+
+Object.defineProperty 虽然已经能够实现双向绑定了，但是他还是有缺陷的。
+
+- 只能对属性进行数据劫持，所以需要深度遍历整个对象
+- 对于数组不能监听到数据的变化
+- 虽然 Vue 中确实能检测到数组数据的变化，但是其实是使用了 hack 的办法，并且也是有缺陷的。
+
+反观 Proxy 就没以上的问题，原生支持监听数组变化，并且可以直接对整个对象进行拦截，所以 Vue 也将在下个大版本中使用 Proxy 替换 Object.defineProperty {% post_link es6-01 跳转到 Proxy的作用 %}
+
+``` js
+let onWatch = (obj, setBind, getLogger) => {
+  let handler = {
+    get(target, property, receiver) {
+      getLogger(target, property)
+      return Reflect.get(target, property, receiver);
+    },
+    set(target, property, value, receiver) {
+      setBind(value);
+      return Reflect.set(target, property, value);
+    }
+  };
+  return new Proxy(obj, handler);
+};
+
+let obj = { a: 1 }
+let value
+let p = onWatch(obj, (v) => {
+  value = v
+}, (target, property) => {
+  console.log(`Get '${property}' = ${target[property]}`);
+})
+p.a = 2 // bind `value` to `2`
+p.a // -> Get 'a' = 2
+```

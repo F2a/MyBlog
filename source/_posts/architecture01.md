@@ -16,14 +16,14 @@ toc: true
 
 ### 正确的写法
 
-```
+``` js
 // profile.js
 export var firstName = 'Michael';
 export var lastName = 'Jackson';
 export var year = 1958;
 ```
 
-```
+``` js
 // profile.js
 var firstName = 'Michael';
 var lastName = 'Jackson';
@@ -32,7 +32,7 @@ var year = 1958;
 export {firstName, lastName, year};
 ```
 
-```
+``` js
 export function multiply(x, y) {
   return x * y;
 };
@@ -43,7 +43,7 @@ export function multiply(x, y) {
 
 export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。
 
-```
+``` js
 // 报错
 export 1;
 
@@ -80,7 +80,7 @@ export {f};
 
 export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错
 
-```
+``` js
 function foo() {
   export default 'bar' // SyntaxError 报错
 }
@@ -89,7 +89,7 @@ foo()
 
 export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。
 
-```
+``` js
 export var foo = 'bar';
 setTimeout(() => foo = 'baz', 500);
 // 上面代码输出变量foo，值为bar，500 毫秒之后变成baz。
@@ -101,7 +101,7 @@ setTimeout(() => foo = 'baz', 500);
 2. 一个模块只能有一个默认输出，因此export default命令只能使用一次。
 3. export default也可以用来输出类。
 
-```
+``` js
 // export-default.js
 export default function () {
   console.log('foo');
@@ -124,7 +124,7 @@ customName(); // 'foo'
 
 下面的写法是有效的。
 
-```
+``` js
 // modules.js
 function add(x, y) {
   return x * y;
@@ -144,7 +144,7 @@ import _, { each, forEach } from 'lodash';
 
 ### 重命名 as
 
-```
+``` js
 function v1() { ... }
 function v2() { ... }
 
@@ -163,7 +163,7 @@ export {
 
 import命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（profile.js）对外接口的名称相同。
 
-```
+``` js
 // main.js
 import {firstName, lastName, year} from './profile.js';
 
@@ -174,20 +174,20 @@ function setName(element) {
 
 import后面的from指定模块文件的位置，可以是相对路径，也可以是绝对路径，.js后缀可以省略。如果只是模块名，不带有路径，那么必须有配置文件，告诉 JavaScript 引擎该模块的位置。
 
-```
+``` js
 import {myMethod} from 'util';
 ```
 
 import命令具有提升效果，会提升到整个模块的头部。import命令是编译阶段执行的，在代码运行之前。
 
-```
+``` js
 foo();
 
 import { foo } from 'my_module';
 ```
 
 import语句会执行所加载的模块
-```
+``` js
 // 仅仅执行lodash模块，但是不输入任何值。
 import 'lodash';
 
@@ -196,7 +196,7 @@ import 'lodash';
 import 'lodash';
 ```
 
-```
+``` js
 import { foo } from 'my_module';
 import { bar } from 'my_module';
 
@@ -208,7 +208,7 @@ import { foo, bar } from 'my_module';
 
 import是静态执行，所以不能使用表达式和变量
 
-```
+``` js
 // 报错
 import { 'f' + 'oo' } from 'my_module';
 
@@ -226,13 +226,13 @@ if (x === 1) {
 
 import命令输入的变量都是只读的，因为它的本质是输入接口。也就是说，不允许在加载模块的脚本里面，改写接口。
 
-```
+``` js
 import {a} from './xxx.js'
 
 a = {}; // Syntax Error : 'a' is read-only;
 ```
 
-```
+``` js
 import {a} from './xxx.js'
 
 a.foo = 'hello'; // 合法操作
@@ -244,7 +244,7 @@ a.foo = 'hello'; // 合法操作
 
 用星号（*）指定一个对象，所有输出值都加载在这个对象上面。
 
-```
+``` js
 // circle.js
 
 export function area(radius) {
@@ -256,7 +256,7 @@ export function circumference(radius) {
 }
 ```
 
-```
+``` js
 import { area, circumference } from './circle';
 console.log('圆面积：' + area(4));
 console.log('圆周长：' + circumference(14));
@@ -268,7 +268,7 @@ console.log('圆周长：' + circle.circumference(14));
 
 模块整体加载所在的那个对象（上例是circle），应该是可以静态分析的，所以不允许运行时改变
 
-```
+``` js
 import * as circle from './circle';
 
 // 下面两行都是不允许的
@@ -280,7 +280,7 @@ circle.area = function () {};
 
 import和export命令只能在模块的顶层
 
-```
+``` js
 // 报错
 if (x === 2) {
   import MyModual from './myModual';
@@ -291,7 +291,7 @@ if (x === 2) {
 
 因此，有一个提案，建议引入import()函数，完成动态加载。
 
-```
+``` js
 const main = document.querySelector('main');
 
 import(`./section-modules/${someVariable}.js`)
@@ -305,7 +305,7 @@ import(`./section-modules/${someVariable}.js`)
 
 import()函数可以用在任何地方，不仅仅是模块，非模块的脚本也可以使用。它是运行时执行，也就是说，什么时候运行到这一句，就会加载指定的模块。另外，import()函数与所加载的模块没有静态连接关系，这点也是与import语句不相同。import()类似于 Node 的require方法，区别主要是前者是异步加载，后者是同步加载。
 
-```
+``` js
 // 按需加载。
 button.addEventListener('click', event => {
   import('./dialogBox.js')
@@ -330,7 +330,7 @@ import(f())
 .then(...);
 ```
 
-```
+``` js
 // default输出接口，可以用参数直接获得。
 import('./myModule.js')
 .then(myModule => {
@@ -358,7 +358,7 @@ Promise.all([
 
 ### 重命名 as
 
-```
+``` js
 import { lastName as surname } from './profile.js';
 ```
 
@@ -366,7 +366,7 @@ import { lastName as surname } from './profile.js';
 
 CommonJs 是 Node 独有的规范，浏览器中使用就需要用到 Browserify 解析。
 
-```
+``` js
 // a.js
 module.exports = {
     a: 1
@@ -392,7 +392,7 @@ module.a // -> log 1
 
 AMD 是由 RequireJS 提出的
 
-```
+``` js
 // AMD
 define(['./a', './b'], function(a, b) {
     a.do()

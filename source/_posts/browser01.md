@@ -25,7 +25,7 @@ toc: true
 
 一般来说，我们只希望事件只触发在目标上，这时候可以使用 stopPropagation 来阻止事件的进一步传播。通常我们认为 stopPropagation 是用来阻止事件冒泡的，其实该函数也可以阻止捕获事件。stopImmediatePropagation 同样也能实现阻止事件，但是还能阻止该事件目标执行别的注册事件。
 
-```
+``` js
 node.addEventListener('click',(event) =>{
     event.stopImmediatePropagation()
     console.log('冒泡')
@@ -40,7 +40,7 @@ node.addEventListener('click',(event) => {
 
 如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上
 
-```
+``` js
 <ul id="ul">
     <li>1</li>
     <li>2</li>
@@ -71,7 +71,7 @@ node.addEventListener('click',(event) => {
 
 JSONP 的原理很简单，就是利用 ` <script> ` 标签没有跨域限制的漏洞。通过 ` <script> ` 标签指向一个需要访问的地址并提供一个回调函数来接收数据当需要通讯时。
 
-```
+``` js
 // JSONP 使用简单且兼容性不错，但是只限于 get 请求。
 <script src="http://domain/api?param1=a&param2=b&callback=jsonp"></script>
 <script>
@@ -114,7 +114,7 @@ CORS需要浏览器和后端同时支持。IE 8 和 9 需要通过 XDomainReques
 
 只需要给页面添加 document.domain = 'test.com' 表示二级域名都相同就可以实现跨域
 
-```
+``` js
 二级域（或称二级域名；英语：Second-level domain；英文缩写：SLD）是互联网DNS等级之中，处于顶级域名之下的域。
 二级域名是域名的倒数第二个部分，例如在域名example.com中，二级域名是example。
 
@@ -128,7 +128,7 @@ tieba.baidu.com 二级域名
 
 这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息
 
-```
+``` js
 // 发送消息端
 window.parent.postMessage('message', 'http://test.com');
 // 接收消息端
@@ -147,7 +147,7 @@ mc.addEventListener('message', (event) => {
 
 JS 在执行的过程中会产生执行环境，这些执行环境会被顺序的加入到执行栈中。如果遇到异步的代码，会被挂起并加入到 Task（有多种 task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。
 
-```
+``` js
 console.log('script start');
 
 setTimeout(function() {
@@ -161,7 +161,7 @@ console.log('script end');
 
 不同的任务源会被分配到不同的 Task 队列中，任务源可以分为 微任务（microtask） 和 宏任务（macrotask）。在 ES6 规范中，microtask 称为 jobs，macrotask 称为 task。
 
-```
+``` js
 console.log('script start');
 
 setTimeout(function() {
@@ -239,7 +239,7 @@ Servcie worker可以通过 FetchEvent 事件去响应请求。通过使用 Fetch
 
 - 目前该技术通常用来做缓存文件，提高首屏速度，可以试着来实现这个功能。
 
-```
+``` js
 // index.js
 if (navigator.serviceWorker) {
   navigator.serviceWorker
@@ -303,7 +303,7 @@ DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析，不
 
 通过以下几个常用属性可以生成新图层
 
-```
+``` js
 3D 变换：translate3d、translateZ
 will-change
 video、iframe 标签
@@ -323,7 +323,7 @@ position: fixed
 
 所以以下几个动作可能会导致性能问题：
 
-```
+``` js
 改变 window 大小
 改变字体
 添加或删除样式
@@ -338,7 +338,7 @@ position: fixed
 
 判断是否触发了 media query
 
-```
+``` js
 更新动画并且发送事件
 判断是否有全屏操作事件
 执行 requestAnimationFrame 回调
@@ -352,7 +352,7 @@ position: fixed
 
 使用 translate 替代 top
 
-```
+``` js
 <div class="test"></div>
 <style>
     .test {
@@ -377,7 +377,7 @@ position: fixed
 
 不要把 DOM 结点的属性值放在一个循环里当成循环里的变量
 
-```
+``` js
 for(let i = 0; i < 1000; i++) {
     // 获取 offsetTop 会导致回流，因为需要去获取正确的值
     console.log(document.querySelector('.test').style.offsetTop)
