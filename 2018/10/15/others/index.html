@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="银の龙の背に乗って">
 <meta property="og:description" content="环境配置安装Node.js略 安装Git略 安装Hexo12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看 hexo主题设置安装主题hexo官网提供许多 主题 12$ hexo clean$ git clon">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-11-23T03:51:44.542Z">
+<meta property="og:updated_time" content="2018-11-27T09:19:04.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在github上搭建hexo博客踩坑记录">
 <meta name="twitter:description" content="环境配置安装Node.js略 安装Git略 安装Hexo12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看 hexo主题设置安装主题hexo官网提供许多 主题 12$ hexo clean$ git clon">
@@ -140,9 +140,9 @@
             <div class="post-content">
             <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>略</p>
 <h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>略</p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看</span><br></pre></td></tr></table></figure>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看</span><br></pre></td></tr></table></figure>
 <h1 id="hexo主题设置"><a href="#hexo主题设置" class="headerlink" title="hexo主题设置"></a>hexo主题设置</h1><h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>hexo官网提供许多 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ git clone 主题地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ git clone 主题地址</span><br></pre></td></tr></table></figure>
 <h2 id="启用主题"><a href="#启用主题" class="headerlink" title="启用主题"></a>启用主题</h2><p>修改Hexo目录下的_config.yml配置文件中的theme属性。</p>
 <h1 id="设置Github"><a href="#设置Github" class="headerlink" title="设置Github"></a>设置Github</h1><h2 id="什么是Github-Pages"><a href="#什么是Github-Pages" class="headerlink" title="什么是Github Pages"></a>什么是Github Pages</h2><p>GitHub Pages 本用于介绍托管在GitHub的项目，不过，由于他的空间免费稳定，用来做搭建一个博客再好不过了。</p>
 <p>每个帐号只能有一个仓库来存放个人主页，而且仓库的名字必须是username/projectname.github.io，这是特殊的命名约定。你可以通过<a href="http://username.github.io" target="_blank" rel="noopener">http://username.github.io</a> 来访问你的个人主页。</p>
@@ -151,7 +151,7 @@
 <li><em>新建一个github项目</em></li>
 </ol>
 <p>直接拉取Github项目到本地</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/yourusername/yourprojectname.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/yourusername/yourprojectname.git</span></span><br></pre></td></tr></table></figure>
 <p>复制代码然后把Hexo项目文件夹下的内容全部复制过来，再npm install。关于Git的使用请自行掌握。</p>
 <ol start="2">
 <li><em>如果是已经把源码关联master分支的项目</em></li>
@@ -162,36 +162,36 @@
 <li>在项目Settings - Branches 切换github项目Default branch为source</li>
 <li>清空master分支</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 如果直接删除会发现删除不了，因为在本地您处在master分支，在远程master为默认分支，所以切换默认分支是必须的</span><br><span class="line"></span><br><span class="line">$ git branch -D master //删除本地master分支</span><br><span class="line">$ git push origin :master //删除远程master分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果直接删除会发现删除不了，因为在本地您处在master分支，在远程master为默认分支，所以切换默认分支是必须的</span></span><br><span class="line"></span><br><span class="line">$ git branch -D master <span class="comment">//删除本地master分支</span></span><br><span class="line">$ git push origin :master <span class="comment">//删除远程master分支</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建一个空分支；使用参数 –orphan，这个参数的主要作用有两个，一个是拷贝当前所在分支的所有文件，另一个是没有父结点，可以理解为没有历史记录，是一个完全独立背景干净的分支。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout --orphan gh-pages</span><br><span class="line">$ git rm -rf . // 删除原来代码树下的所有文件</span><br><span class="line">$ git branch -a // 这时候是看不到当前分支的，不用担心，下一步</span><br><span class="line">$ git commit --allow-empty -m &quot;root commit&quot;  // 在推送到GitHub之前，即使它没有任何内容，您至少需要一次提交，因为您无法推送空分支</span><br><span class="line">$ git push origin empty-branch // 最后，把它推到远程</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout --orphan gh-pages</span><br><span class="line">$ git rm -rf . <span class="comment">// 删除原来代码树下的所有文件</span></span><br><span class="line">$ git branch -a <span class="comment">// 这时候是看不到当前分支的，不用担心，下一步</span></span><br><span class="line">$ git commit --allow-empty -m <span class="string">"root commit"</span>  <span class="comment">// 在推送到GitHub之前，即使它没有任何内容，您至少需要一次提交，因为您无法推送空分支</span></span><br><span class="line">$ git push origin empty-branch <span class="comment">// 最后，把它推到远程</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>复制代码然后把Hexo项目文件夹下的内容全部复制过来，再npm install。</li>
 </ul>
 <p><strong><em>这样我们就可以在一个项目中同时保存hexo的原始代码和部署文件了</em></strong></p>
 <h1 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h1><p>hexo deploy可以部署到很多平台，具体可以<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">参考这个链接</a>。 如果部署到github，需要在配置文件_config.xml中作如下修改：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:username/projectname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:username/projectname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 <p>然后在命令行中执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g // 产生静态文件</span><br><span class="line">hexo d // 将静态文件部署到远程仓库 master 分支下</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g <span class="comment">// 产生静态文件</span></span><br><span class="line">hexo d <span class="comment">// 将静态文件部署到远程仓库 master 分支下</span></span><br></pre></td></tr></table></figure>
 <h2 id="踩坑提醒"><a href="#踩坑提醒" class="headerlink" title="踩坑提醒"></a>踩坑提醒</h2><ol>
 <li>注意需要提前安装一个扩展：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>如果出现下面这样的错误，</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read <span class="keyword">from</span> remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
 <p>则是因为没有设置好public key所致。<br>在本机生成public key(参考github帮助)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃ssh-keygen -t rsa -b 4096 -C &quot;xxx@xxx.com&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">"xxx@xxx.com"</span></span><br></pre></td></tr></table></figure>
 <p>然后在#user_id/.ssh目录下会生成两个文件，id_rsa.pub和id_rsa.<br>然后登陆github，在SSH设置页面添加上刚才的public key文件也就是id_rsa.pub的内容即可。</p>
 <ol start="3">
 <li>如果github-pages上的网页没有样式</li>
 </ol>
 <p>官网文档-配置中已经有解释</p>
 <p>修改_config.yml配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果您的网站存放在子目录中，例如 http://yoursite.com/blog，</span><br><span class="line">则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果您的网站存放在子目录中，例如 http:<span class="comment">//yoursite.com/blog，</span></span><br><span class="line">则请将您的 url 设为 http:<span class="comment">//yoursite.com/blog 并把 root 设为 /blog/。</span></span><br></pre></td></tr></table></figure>
 
             </div>
           
@@ -217,8 +217,8 @@
       </a>
     
     
-      <a class="next" href="/blog/2018/10/01/architecture01/">
-        <span class="next-text nav-default">初识前端模块化</span>
+      <a class="next" href="/blog/2018/09/11/browser02/">
+        <span class="next-text nav-default">优化项目，增强体验（二）</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
