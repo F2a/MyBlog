@@ -13,7 +13,7 @@ toc: true
 
 DNS 解析也是需要时间的，可以通过预解析的方式来预先获得域名所对应的 IP。
 
-```
+``` js
 <link rel="dns-prefetch" href="//yuchengkai.cn">
 ```
 
@@ -37,7 +37,7 @@ DNS 作为互联网的基础协议，其解析的速度似乎很容易被网站�
 
 预加载其实是声明式的 fetch ，强制浏览器请求资源，并且不会阻塞 onload 事件，可以使用以下代码开启预加载。
 
-```
+``` js
 <link rel="preload" href="http://example.com">
 ```
 
@@ -59,7 +59,7 @@ DNS 作为互联网的基础协议，其解析的速度似乎很容易被网站�
 
 可以通过预渲染将下载的文件预先在后台渲染，可以使用以下代码开启预渲染
 
-```
+``` js
 <link rel="prerender" href="http://example.com">
 ```
 
@@ -75,7 +75,7 @@ DNS 作为互联网的基础协议，其解析的速度似乎很容易被网站�
 
 实现强缓存可以通过两种响应头实现：Expires 和 Cache-Control 。强缓存表示在缓存期间不需要请求，state code 为 200
 
-```
+``` js
 Expires: Wed, 22 Oct 2018 08:41:00 GMT
 // Expires 是 HTTP / 1.0 的产物，表示资源会在 Wed, 22 Oct 2018 08:41:00 GMT 后过期，需要再次请求。
 // 并且 Expires 受限于本地时间，如果修改了本地时间，可能会造成缓存失效。

@@ -17,7 +17,7 @@ toc: true
 
 ## 安装Hexo
 
-```
+``` js
 $ npm install hexo-cli -g
 $ hexo init blog
 $ cd blog
@@ -31,7 +31,7 @@ $ hexo s # 或者hexo server，可以在http://localhost:4000/ 查看
 
 hexo官网提供许多 [主题](https://hexo.io/themes/)
 
-```
+``` js
 $ hexo clean
 $ git clone 主题地址
 ```
@@ -56,7 +56,7 @@ GitHub Pages 本用于介绍托管在GitHub的项目，不过，由于他的空�
 
 直接拉取Github项目到本地
 
-```
+``` js
 git clone https://github.com/yourusername/yourprojectname.git
 ```
 
@@ -70,7 +70,7 @@ git clone https://github.com/yourusername/yourprojectname.git
 - 在项目Settings - Branches 切换github项目Default branch为source
 - 清空master分支
 
-```
+``` js
 // 如果直接删除会发现删除不了，因为在本地您处在master分支，在远程master为默认分支，所以切换默认分支是必须的
 
 $ git branch -D master //删除本地master分支
@@ -79,7 +79,7 @@ $ git push origin :master //删除远程master分支
 
 - 创建一个空分支；使用参数 --orphan，这个参数的主要作用有两个，一个是拷贝当前所在分支的所有文件，另一个是没有父结点，可以理解为没有历史记录，是一个完全独立背景干净的分支。
 
-```
+``` js
 $ git checkout --orphan gh-pages
 $ git rm -rf . // 删除原来代码树下的所有文件
 $ git branch -a // 这时候是看不到当前分支的，不用担心，下一步
@@ -95,7 +95,7 @@ $ git push origin empty-branch // 最后，把它推到远程
 
 hexo deploy可以部署到很多平台，具体可以[参考这个链接](https://hexo.io/docs/deployment.html)。 如果部署到github，需要在配置文件_config.xml中作如下修改：
 
-```
+``` js
 deploy:
   type: git
   repo: git@github.com:username/projectname.github.io.git
@@ -104,7 +104,7 @@ deploy:
 
 然后在命令行中执行
 
-```
+``` js
 hexo g // 产生静态文件
 hexo d // 将静态文件部署到远程仓库 master 分支下
 ```
@@ -113,13 +113,13 @@ hexo d // 将静态文件部署到远程仓库 master 分支下
 
 1. 注意需要提前安装一个扩展：
 
-```
+``` js
 $ npm install hexo-deployer-git --save
 ```
 
 2. 如果出现下面这样的错误，
 
-```
+``` js
 Permission denied (publickey).
 fatal: Could not read from remote repository.
 Please make sure you have the correct access rights
@@ -129,7 +129,7 @@ and the repository exists.
 则是因为没有设置好public key所致。
 在本机生成public key(参考github帮助)：
 
-```
+``` js
 ＃ssh-keygen -t rsa -b 4096 -C "xxx@xxx.com"
 ```
 
@@ -142,7 +142,7 @@ and the repository exists.
 
 修改_config.yml配置：
 
-```
+``` js
 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
 则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
 ```

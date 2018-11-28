@@ -1,7 +1,7 @@
 ---
 title: Vue 3.0 新特性预览
 date: 2018-11-21 10:13:29
-tags: vue
+tags: VUE
 ---
 
 > 来自：开源中国

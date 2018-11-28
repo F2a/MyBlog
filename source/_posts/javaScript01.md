@@ -15,7 +15,7 @@ toc: true
 
 - typeof:
 
-```
+``` js
 typeof 1 // 'number'
 typeof '1' // 'string'
 typeof undefined // 'undefined'
@@ -32,7 +32,7 @@ typeof console.log // 'function'
 
     对象在转换基本类型时，首先会调用 valueOf 然后调用 toString。并且这两个方法你是可以重写的。
 
-```
+``` js
 let a = {
     valueOf() {
     	return 0
@@ -61,7 +61,7 @@ let a = {
     其他运算只要其中一方是数字，那么另一方就转为数字。
     并且加法运算会触发三种类型转换：将值转换为原始值，转换为数字，转换为字符串。
 
-```
+``` js
 1 + '1' // '11'
 2 * '2' // 4
 [1, 2] + [2, 1] // '1,22,1'
@@ -85,7 +85,7 @@ let a = {
 
 - 在调用 new 的过程中会发生以上四件事情
 
-```
+``` js
 // 新生成了一个对象
 // 链接到原型
 // 绑定 this
@@ -107,7 +107,7 @@ function new() {
 
 - 执行优先级
 
-```
+``` js
 function Foo() {
     return this;
 }
@@ -124,7 +124,7 @@ new Foo().getName(); // -> 2
 // new Foo() 的优先级大于 new Foo
 ```
 
-```
+``` js
 new (Foo.getName());
 (new Foo()).getName();
 
@@ -138,7 +138,7 @@ new (Foo.getName());
 - 通用规则
 new有最高优先级，利用 call，apply，bind 改变 this，优先级仅次于 new。
 
-```
+``` js
 function foo() {
 	console.log(this.a)
 }
@@ -191,7 +191,7 @@ console.log(c.a)
 
 ### 属性 this&作用域链
 
-```
+``` js
 b() // call b
 console.log(a) // undefined
 
@@ -206,7 +206,7 @@ function b() {
 
 - 在提升的过程中，相同的函数会覆盖上一个函数，并且函数优先于变量提升
 
-```
+``` js
 b() // call b second
 
 function b() {
@@ -220,7 +220,7 @@ var b = 'Hello world'
 
 - 对于非匿名的立即执行函数需要注意以下一点
 
-```
+``` js
 var foo = 1
 (function foo() {
     foo = 10
@@ -233,7 +233,7 @@ var foo = 1
 
 循环中使用闭包解决 var 定义函数的问题
 
-```
+``` js
 for ( var i=1; i<=5; i++) {
 	setTimeout( function timer() {
 		console.log( i );
@@ -246,7 +246,7 @@ for ( var i=1; i<=5; i++) {
 
 第一种使用闭包
 
-```
+``` js
 for (var i = 1; i <= 5; i++) {
   (function(j) {
     setTimeout(function timer() {
@@ -258,7 +258,7 @@ for (var i = 1; i <= 5; i++) {
 
 第二种就是使用 setTimeout 的第三个参数
 
-```
+``` js
 for ( var i=1; i<=5; i++) {
 	setTimeout( function timer(j) {
 		console.log( j );
@@ -273,7 +273,7 @@ setTimeout(a, 1000, 2, 3)
 
 第三种就是使用 let 定义 i 了
 
-```
+``` js
 for ( let i=1; i<=5; i++) {
 	setTimeout( function timer() {
 		console.log( i );
@@ -283,7 +283,7 @@ for ( let i=1; i<=5; i++) {
 
 因为对于 let 来说，他会创建一个块级作用域，相当于
 
-```
+``` js
 { // 形成块级作用域
   let i = 0
   {
@@ -310,7 +310,7 @@ for ( let i=1; i<=5; i++) {
 
 - 通过 Object.assign
 
-```
+``` js
 let a = {
     age: 1
 }
@@ -321,7 +321,7 @@ console.log(b.age) // 1
 
 - 通过 展开运算符（…）
 
-```
+``` js
 let a = {
     age: 1
 }
@@ -336,7 +336,7 @@ console.log(b.age) // 1
 
 - 通过 JSON.parse(JSON.stringify(object))
 
-```
+``` js
 let a = {
     age: 1,
     jobs: {
@@ -350,7 +350,7 @@ console.log(b.jobs.first) // FE
 
 该方法也是有局限性的：会忽略 undefined，忽略函数，不能解决循环引用的对象
 
-```
+``` js
 let obj = {
   a: 1,
   b: {
@@ -369,7 +369,7 @@ console.log(newObj)
 
 - 如果你的数据中含有以上三种情况下，通过  lodash 的深拷贝函数，或者使用 MessageChannel
 
-```
+``` js
 function structuralClone(obj) {
   return new Promise(resolve => {
     const {port1, port2} = new MessageChannel();
