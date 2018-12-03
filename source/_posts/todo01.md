@@ -8,6 +8,7 @@ tags:
 
 - js 基础
     - P1-[JavaScript 设计模式](https://juejin.im/entry/58c280b1da2f600d8725b887) （完成度：0%）
+- react深度学习
 - vue深度学习
     - P2-[Vue 源码学习](https://juejin.im/post/5b90f8c5f265da0ab50359a3) （完成度：0%）
     - P2-[Vue 双向绑定原理及实现](https://juejin.im/entry/5923973da22b9d005893805a) （完成度：0%）
