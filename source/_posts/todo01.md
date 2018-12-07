@@ -29,3 +29,4 @@ tags:
     - P3-[面试题大杂烩7](http://www.codeceo.com/article/web-interview-collection.html)（完成度：0%）
     - P3-[面试题大杂烩6](https://mp.weixin.qq.com/s/44WzQn9f-Gxr26yBmGY9TA)（完成度：0%）
 - P3-[LeetCode](https://leetcode-cn.com/explore/) 算法题训练 （完成度：0%）
+- P1-掘金小册 （完成度：0%）
