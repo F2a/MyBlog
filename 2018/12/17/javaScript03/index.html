@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="解析 Array.apply(null, { length: 20 })">
+
+
+
+
+  <meta name="keywords" content="JS原理,">
+
+
+
+
+
+  <link rel="alternate" href="/blog/default" title="银の龙の背に乗って">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="https://f2a.github.io/blog/2018/12/17/javaScript03/">
+
+
+<meta name="description" content="前言今天在群里看到有人贴了一段代码： 123456render: function (createElement) &amp;#123;  return createElement(&apos;div&apos;,    Array.apply(null, &amp;#123; length: 20 &amp;#125;).map(function () &amp;#123;      return createElement(&apos;p&apos;, &apos;hi&apos;)">
+<meta name="keywords" content="JS原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解析 Array.apply(null, { length: 20 })">
+<meta property="og:url" content="https://f2a.github.io/blog/2018/12/17/javaScript03/index.html">
+<meta property="og:site_name" content="银の龙の背に乗って">
+<meta property="og:description" content="前言今天在群里看到有人贴了一段代码： 123456render: function (createElement) &amp;#123;  return createElement(&apos;div&apos;,    Array.apply(null, &amp;#123; length: 20 &amp;#125;).map(function () &amp;#123;      return createElement(&apos;p&apos;, &apos;hi&apos;)">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-17T07:49:15.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解析 Array.apply(null, { length: 20 })">
+<meta name="twitter:description" content="前言今天在群里看到有人贴了一段代码： 123456render: function (createElement) &amp;#123;  return createElement(&apos;div&apos;,    Array.apply(null, &amp;#123; length: 20 &amp;#125;).map(function () &amp;#123;      return createElement(&apos;p&apos;, &apos;hi&apos;)">
+
+
+<link rel="stylesheet" type="text/css" href="/blog/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 解析 Array.apply(null, { length: 20 }) - 银の龙の背に乗って </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/blog/." class="logo">银の龙の背に乗って</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/blog/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/blog/about">
+                            
+                            
+                                关于
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          解析 Array.apply(null, { length: 20 })
+        
+      </h1>
+
+      <time class="post-time">
+          12月 17 2018
+      </time>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组的元素的初始化"><span class="toc-text">数组的元素的初始化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#apply函数与鸭式辨型"><span class="toc-text">apply函数与鸭式辨型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+    </div>
+  </div>
+
+
+    
+            <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天在群里看到有人贴了一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>其中 <code>Array.apply(null, { length: 20 })</code> 一句让人费解。于是挖一下这段代码想实现功能，以及相关的原理。</p>
+<h1 id="数组的元素的初始化"><a href="#数组的元素的初始化" class="headerlink" title="数组的元素的初始化"></a>数组的元素的初始化</h1><p>在chrome控制台中打印 <code>Array.apply(null, { length: 20 })</code> ，输入值是长度为20的空数组；那为什么不直接 <code>Array(20)</code>呢?这其中就涉及到了数组的初始化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">Array</span>(<span class="number">20</span>); <span class="comment">// 等价于var a = new Array(20);</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>注意该数组的元素并没有被初始化</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span> <span class="keyword">in</span> a); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> <span class="keyword">in</span> a); <span class="comment">// false, 因为数组下标还未初始化</span></span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="number">0</span>]);   <span class="comment">// undefined, 因为数组下标0还未初始化,访问不存在的属性返回undefined</span></span><br></pre></td></tr></table></figure>
+<h1 id="apply函数与鸭式辨型"><a href="#apply函数与鸭式辨型" class="headerlink" title="apply函数与鸭式辨型"></a>apply函数与鸭式辨型</h1><p>apply函数的第二个参数除了可以是数组外，还可以是类数组对象（即 鸭式辨型）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a[<span class="number">0</span>]); <span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// 可以转成真正的数组</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="built_in">Array</span>.prototype.slice.call(&#123;<span class="attr">length</span>: <span class="number">1</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(a)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><code>鸭式辨型来自于James Whitecomb Riley的名言：&quot;像鸭子一样走路并且嘎嘎叫的就叫鸭子。&quot;通过制定规则来判定对象是否正确</code></p>
+<p>James Whitecomb Riley 判定鸭子为包含属性：像鸭子一样走路 &amp; 嘎嘎叫。</p>
+<p>类数组对象的判定：即包含length属性，且length属性值是个数字的对象。对象<code>{length: 20}</code>就是一个类数组对象。</p>
+<p>再回头看看 <code>Array.apply(null, { length: 20 })</code> 他就等价于：</p>
+<p>（方便书写用 <code>Array.apply(null, { length: 2 })</code> ）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、&#123;length: 2&#125;作为Array.apply第二个参数等同于[undefined, undefined]作为Array.apply第二个参数</span></span><br><span class="line"><span class="built_in">Array</span>.apply(<span class="literal">null</span>, [<span class="literal">undefined</span>, <span class="literal">undefined</span>]);</span><br><span class="line"><span class="comment">// 2、apply方法的执行结果</span></span><br><span class="line"><span class="built_in">Array</span>(<span class="literal">undefined</span>, <span class="literal">undefined</span>);</span><br><span class="line"><span class="comment">// 3、Array方法直接调用和new方式调用等价</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="literal">undefined</span>, <span class="literal">undefined</span>);</span><br></pre></td></tr></table></figure>
+<p>所以 <code>Array.apply(null, { length: 2 })</code> 输入一个长度为2，且每个元素值都被初赋值为undefined的数组。（注意直接<code>Array(20)</code>元素是没有初始化。）</p>
+<p><strong><em>为什么要初始化？</em></strong></p>
+<p>重新回顾下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>即是因为map函数并不会遍历数组中没有初始化或者被delete的元素，所以…</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><ul>
+<li>与<code>map</code>有相同限制还有<code>forEach, reduce</code>方法</li>
+<li>几乎所有的数组方法都适用于类数组对象（鸭式辨型）</li>
+</ul>
+<p>例子<code>pop</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;<span class="number">0</span>:<span class="string">"cat"</span>, <span class="number">1</span>:<span class="string">"dog"</span>, <span class="number">2</span>:<span class="string">"cow"</span>, <span class="number">3</span>:<span class="string">"chicken"</span>, <span class="number">4</span>:<span class="string">"mouse"</span>, <span class="attr">length</span>:<span class="number">5</span>&#125;</span><br><span class="line"><span class="keyword">var</span> item = <span class="built_in">Array</span>.prototype.pop.call(o);</span><br><span class="line"><span class="built_in">console</span>.log(o); <span class="comment">// Object &#123;0: "cat", 1: "dog", 2: "cow", 3: "chicken", length: 4&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(item); <span class="comment">// mouse</span></span><br></pre></td></tr></table></figure>
+<p>但如果类数组对象不具有length属性，那么该对象将被创建length属性，length值为0。如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;<span class="number">0</span>:<span class="string">"cat"</span>, <span class="number">1</span>:<span class="string">"dog"</span>, <span class="number">2</span>:<span class="string">"cow"</span>, <span class="number">3</span>:<span class="string">"chicken"</span>, <span class="number">4</span>:<span class="string">"mouse"</span>&#125;</span><br><span class="line"><span class="keyword">var</span> item = <span class="built_in">Array</span>.prototype.pop.call(o);</span><br><span class="line"><span class="built_in">console</span>.log(array); <span class="comment">// Object &#123;0: "cat", 1: "dog", 2: "cow", 3: "chicken", 4: "mouse", length: 0&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(item); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他等价的写法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.apply(<span class="literal">null</span>, <span class="built_in">Array</span>(<span class="number">20</span>)); <span class="comment">// 第二个参数用Array(20)代替&#123;length: 20&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6的API</span></span><br><span class="line"><span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>: <span class="number">20</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>(<span class="number">20</span>).fill(<span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Array(2) 等价于[,,]，不等价于[undefined, undefined]</code></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/blog/tags/JS原理/">JS原理</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/blog/2018/11/27/todo01/">
+        <span class="next-text nav-default">Todolist（12月任务清单）</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2017 -
+    
+    2018
+    <span class="footer-author">FangR.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/blog/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/blog/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/blog/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
