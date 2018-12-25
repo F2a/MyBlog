@@ -83,6 +83,15 @@ render: function (createElement) {
 
 即是因为map函数并不会遍历数组中没有初始化或者被delete的元素，所以...
 
+巩固一下，看一道面试题，下面代码输出什么
+
+```
+var ary = Array(3);
+ary[0]=2
+ary.map(function(elem) { return '1'; });
+// 答案在底部
+```
+
 # 补充
 
 - 与`map`有相同限制还有`forEach, reduce`方法
@@ -117,3 +126,9 @@ Array.from({length: 20})
 Array(20).fill(null)
 ```
 - `Array(2) 等价于[,,]，不等价于[undefined, undefined]`
+
+*答案*
+
+array 上的操作会跳过未初始化的'坑'。
+所以答案是 ["1", undefined × 2]
+
