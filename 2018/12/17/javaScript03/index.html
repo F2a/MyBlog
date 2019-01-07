@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="银の龙の背に乗って">
 <meta property="og:description" content="前言今天在群里看到有人贴了一段代码： 123456render: function (createElement) &amp;#123;  return createElement(&apos;div&apos;,    Array.apply(null, &amp;#123; length: 20 &amp;#125;).map(function () &amp;#123;      return createElement(&apos;p&apos;, &apos;hi&apos;)">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-17T07:49:15.280Z">
+<meta property="og:updated_time" content="2018-12-25T08:14:39.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解析 Array.apply(null, { length: 20 })">
 <meta name="twitter:description" content="前言今天在群里看到有人贴了一段代码： 123456render: function (createElement) &amp;#123;  return createElement(&apos;div&apos;,    Array.apply(null, &amp;#123; length: 20 &amp;#125;).map(function () &amp;#123;      return createElement(&apos;p&apos;, &apos;hi&apos;)">
@@ -158,6 +158,8 @@
 <p>重新回顾下代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
 <p>即是因为map函数并不会遍历数组中没有初始化或者被delete的元素，所以…</p>
+<p>巩固一下，看一道面试题，下面代码输出什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var ary = Array(3);</span><br><span class="line">ary[0]=2</span><br><span class="line">ary.map(function(elem) &#123; return &apos;1&apos;; &#125;);</span><br><span class="line">// 答案在底部</span><br></pre></td></tr></table></figure>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><ul>
 <li>与<code>map</code>有相同限制还有<code>forEach, reduce</code>方法</li>
 <li>几乎所有的数组方法都适用于类数组对象（鸭式辨型）</li>
@@ -173,6 +175,8 @@
 <ul>
 <li><code>Array(2) 等价于[,,]，不等价于[undefined, undefined]</code></li>
 </ul>
+<p><em>答案</em></p>
+<p>array 上的操作会跳过未初始化的’坑’。<br>所以答案是 [“1”, undefined × 2]</p>
 
             </div>
           
@@ -190,6 +194,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/blog/2019/01/04/others02/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2018年复盘总结-树目标，迎希望！</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
     
       <a class="next" href="/blog/2018/11/27/todo01/">
@@ -220,7 +230,7 @@
     
         2017 -
     
-    2018
+    2019
     <span class="footer-author">FangR.</span>
     <span class="power-by">
         由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
